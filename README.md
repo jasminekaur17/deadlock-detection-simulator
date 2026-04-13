@@ -1,114 +1,154 @@
-Here is a **clean, well-structured `README.md`** for your project, created strictly from the content we discussed and suitable for academic submission and GitHub.
-You can copy-paste this directly as `README.md` in your repository.
-
----
-
 # Deadlock Detection Simulator
 
-## Project Description
-
-The **Deadlock Detection Simulator** is a web-based tool designed to demonstrate how deadlocks occur and how they are detected in operating systems. The simulator allows users to configure processes, resources, and resource allocation matrices, and then analyzes the system state to determine whether a deadlock exists or the system is in a safe state.
-
-The project focuses on providing a clear, interactive, and educational understanding of deadlock detection algorithms through step-by-step execution and graphical visualization.
+> An interactive web-based simulator for understanding, testing, and visualizing deadlock detection concepts in operating systems.
 
 ---
 
-## Features
+## Overview
 
-* Supports **Single-instance resource deadlock detection**
-* Supports **Multi-instance resource deadlock detection**
-* Dynamic configuration of:
+The **Deadlock Detection Simulator** is an educational and interactive project built to help users understand how deadlocks arise in operating systems and how they can be detected under different resource-allocation models.
 
-  * Number of processes
-  * Number of resource types
-* Automatic matrix generation
-* Step-by-step execution visualization
-* Resource Allocation Graph (RAG) visualization (Single-instance mode)
-* Import and export of scenarios using JSON
-* Reset and reconfiguration support
-* Clean and responsive dark-themed UI
+It allows users to configure processes, resources, and matrices, then runs the detection logic to determine whether the system is in a **safe state** or a **deadlock state**. The project emphasizes **clarity**, **visual learning**, and **step-by-step analysis**.
 
 ---
 
-## Modes of Operation
+## Why This Project?
 
-### 1. Single Mode
+Deadlock detection is often difficult to grasp through theory alone. This simulator bridges that gap by offering:
 
-* Uses **Allocated**, **Requested**, and **Available** matrices
-* Assumes one instance per resource
-* Uses a Resource Allocation Graph–based approach
-* Deadlock is detected if no process can proceed and a circular wait exists
-
-### 2. Multi Mode
-
-* Uses **Max**, **Allocated**, and **Available** matrices
-* Supports multiple instances of resources
-* Uses a Banker’s algorithm–style safety check
-* Deadlock is detected if no safe sequence exists
+- Interactive scenario creation
+- Matrix-based input handling
+- Step-by-step detection flow
+- Visual representation of resource relationships
+- Easy experimentation with safe and deadlocked cases
 
 ---
 
-## High-Level Workflow
+## Key Features
 
-```
+- **Single-instance deadlock detection**
+- **Multi-instance deadlock detection**
+- Dynamic selection of:
+  - Number of processes
+  - Number of resource types
+- Automatic matrix generation
+- Step-by-step execution tracing
+- Resource Allocation Graph (RAG) visualization in single-instance mode
+- Scenario import/export using JSON
+- Reset and reconfiguration support
+- Clean and responsive dark-themed interface
+
+---
+
+## Operating Modes
+
+### 1. Single-Instance Mode
+
+This mode is designed for systems where each resource type has only **one instance**.
+
+**Uses:**
+- Allocated matrix
+- Requested matrix
+- Available matrix
+
+**Detection idea:**
+- A process can proceed only if its requested resources are available
+- If no process can proceed and circular waiting exists, the system is deadlocked
+
+---
+
+### 2. Multi-Instance Mode
+
+This mode works for systems where each resource type may have **multiple instances**.
+
+**Uses:**
+- Max matrix
+- Allocated matrix
+- Available matrix
+
+**Detection idea:**
+- Evaluates whether a safe execution order exists
+- If no safe sequence can be formed, the system is considered deadlocked
+
+---
+
+## How the Simulator Works
+
+```text
 Start
   |
-User selects mode and enters process/resource count
+Select mode
   |
-Click "Configure Scenario"
+Enter number of processes and resources
   |
-System generates input matrices
+Generate scenario matrices
   |
-User fills matrix values
+Fill matrix values
   |
-Click "Detect Deadlock"
+Run deadlock detection
   |
-Validate input
+Check if a process can proceed
   |
-Run deadlock detection algorithm
+Repeat until all possible processes finish
   |
-Is Deadlock Present?
-  |-- Yes → Display deadlock result, execution steps, RAG
-  |-- No  → Display safe state, execution steps
+Safe state? ---- Yes ---> Show safe sequence
   |
-User may reset, import/export scenario, or re-run
+  No
+  |
+Show deadlock result
   |
 End
 ```
 
 ---
 
-## Technologies Used
+## Detection Logic Summary
 
-### Programming Languages
+### For Single-Instance Systems
+The simulator checks whether processes can complete using currently available resources. If all remaining processes are waiting indefinitely with no progress possible, a deadlock is detected.
 
-* HTML
-* CSS
-* JavaScript
+### For Multi-Instance Systems
+The simulator applies a safety-check approach similar to the logic used in resource-allocation analysis. It verifies whether all processes can complete in some valid order.
 
-### Libraries and Tools
+---
 
-* **vis-network.js** – for Resource Allocation Graph visualization
+## Educational Value
 
-### Other Tools
+This project is useful for:
 
-* **GitHub** – version control and repository hosting
-* JSON – scenario import/export
+- Operating Systems laboratory work
+- Academic demonstrations
+- Viva preparation
+- Understanding deadlock concepts visually
+- Comparing safe and unsafe system states
+
+---
+
+## Technology Stack
+
+### Frontend
+- **HTML**
+- **CSS**
+- **JavaScript**
+
+### Visualization / Utilities
+- **vis-network.js** for graph-based visualization
+- **JSON** for scenario import/export
 
 ---
 
 ## Project Structure
 
-```
-deadlock-detection/
+```text
+deadlock-detection-simulator/
 │
-├── Index.html          # Main UI structure
-├── styles.css          # Styling and theme
-├── script.js           # Deadlock detection logic and visualization
-├── README.md           # Project documentation
-├── PROJECT_OVERVIEW.md # Detailed project explanation
-├── flow_simple.txt     # Text-based flow diagram
-├── scenarios/          # Example deadlock and safe scenarios
+├── index.html
+├── styles.css
+├── script.js
+├── README.md
+├── PROJECT_OVERVIEW.md
+├── flow_simple.txt
+├── scenarios/
 │   ├── deadlock_example_single.json
 │   └── safe_example_single.json
 └── LICENSE
@@ -116,51 +156,61 @@ deadlock-detection/
 
 ---
 
-## Example Deadlock Scenario (Single Mode)
+## Sample Deadlock Example
 
-* P0 holds R0 and requests R1
-* P1 holds R1 and requests R2
-* P2 holds R2 and requests R0
-* Available resources = 0
+A deadlock may occur in single-instance mode like this:
 
-This creates a circular wait condition, resulting in a deadlock.
+- **P0** holds **R0** and requests **R1**
+- **P1** holds **R1** and requests **R2**
+- **P2** holds **R2** and requests **R0**
+- No additional resources are available
 
----
-
-## GitHub Repository
-
-* **Repository Name:** `deadlock-detection`
-* **Link:** [https://github.com/thenameisakshaj/deadlock-detection](https://github.com/thenameisakshaj/deadlock-detection)
-
-All commits, documentation updates, and scenario examples are tracked in the repository.
+This creates a **circular wait**, so none of the processes can continue.
 
 ---
 
-## Conclusion and Future Scope
+## Expected Outcomes
 
-This project successfully demonstrates the concept of deadlock detection using both single-instance and multi-instance resource models. It bridges the gap between theoretical concepts and practical visualization by allowing users to experiment with real-time scenarios.
+By using this simulator, a user should be able to:
 
-### Future Enhancements
+- Understand how deadlocks occur
+- Differentiate between safe and unsafe states
+- Learn how detection algorithms work
+- Visualize process-resource dependency
+- Experiment with custom scenarios easily
 
-* Deadlock recovery suggestions (process termination or resource preemption)
-* Deadlock avoidance simulation
-* Support for distributed deadlock detection
-* Enhanced visualization for large-scale systems
-* Performance analysis metrics
+---
+
+## Future Improvements
+
+Some possible enhancements for this project include:
+
+- Deadlock recovery suggestions
+- Deadlock avoidance simulation
+- Distributed deadlock detection models
+- More advanced visual analytics
+- Performance statistics for larger scenarios
+- Better UI animations and reporting panels
 
 ---
 
 ## References
 
-* Silberschatz, Galvin, Gagne – *Operating System Concepts*
-* GeeksforGeeks – Deadlock Detection and Banker’s Algorithm
-* vis-network Documentation – Graph Visualization
-* Operating Systems course materials
+- Silberschatz, Galvin, Gagne — *Operating System Concepts*
+- Standard Operating Systems course materials
+- Deadlock detection and resource-allocation model references
+- vis-network.js documentation
 
 ---
 
-If you want, I can also:
+## 🚀 Project Repository
 
-* Align this README exactly with your **college report format**
-* Shorten it for **GitHub description**
-* Add **screenshots section** using your uploaded images
+Explore the complete source code and project files:
+
+🔗 https://github.com/jasminekaur17/deadlock-detection-simulator
+
+> Repository: deadlock-detection-simulator
+
+## Final Note
+
+This simulator is designed to make a core operating systems concept easier to explore, test, and understand through direct interaction. It combines theory with visualization to create a more practical learning experience.
