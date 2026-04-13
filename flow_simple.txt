@@ -1,0 +1,50 @@
+Deadlock Detection Simulator – Simple Flow
+
+Start
+  |
+  v
+User selects Mode (Single / Multi)
+  |
+  v
+User enters:
+  - Number of Processes
+  - Number of Resources
+  |
+  v
+Click "Configure Scenario"
+  |
+  v
+System generates input tables:
+  - Single: Allocated, Requested, Available
+  - Multi:  Max, Allocated, Available
+  |
+  v
+User fills matrices
+  |
+  v
+Click "Detect Deadlock"
+  |
+  v
+Validate input
+  |-- Invalid --> Show error message --> Back to user input
+  |
+  v
+Run deadlock detection algorithm
+  |
+  v
+Is system deadlocked?
+  |-- Yes --> Show "Deadlock Detected" + deadlocked processes
+  |          Show execution steps
+  |          (and RAG in single mode)
+  |
+  |-- No  --> Show "No Deadlock" (Safe state)
+  |          Show execution steps
+  |
+  v
+User may:
+  - Change values and run again
+  - Export / import scenario JSON
+  - Reset simulator
+  |
+  v
+End
