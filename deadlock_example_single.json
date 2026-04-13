@@ -1,0 +1,14 @@
+{
+  "mode": "single",
+  "allocated": [
+    [1, 0, 0],  // P0 holds R0
+    [0, 1, 0],  // P1 holds R1
+    [0, 0, 1]   // P2 holds R2
+  ],
+  "requested": [
+    [0, 1, 0],  // P0 requests R1
+    [0, 0, 1],  // P1 requests R2
+    [1, 0, 0]   // P2 requests R0
+  ],
+  "available": [0, 0, 0]
+}
